@@ -11,6 +11,12 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->group(['prefix' => '/api'], function () use ($router) {
+    $router->get('/pautas', 'PautaController@getAll');
+
+    $router->group(['prefix' => '/pauta'], function () use ($router) {
+        $router->get('/{id}', 'PautaController@get');
+        $router->post('/{id}', 'PautaController@new');
+        $router->put('/{id}', 'PautaController@update');
+    });
 });
