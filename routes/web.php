@@ -16,7 +16,8 @@ $router->group(['prefix' => '/api'], function () use ($router) {
 
     $router->group(['prefix' => '/pauta'], function () use ($router) {
         $router->get('/{id}', 'PautaController@get');
-        $router->post('/{id}', 'PautaController@new');
+        $router->post('/', 'PautaController@new');
         $router->put('/{id}', 'PautaController@update');
+        $router->delete('/{id}', 'PautaController@remove');
     });
 });

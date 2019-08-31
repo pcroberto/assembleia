@@ -12,23 +12,25 @@ services:
         - POSTGRES_PASSWORD=123456
         - POSTGRES_DB=assembleia
 
-    assembleia-webserver:
-      image: nginx:alpine
-      container_name: assembleia-webserver
-      working_dir: /application
-      volumes:
-          - .:/application
-          - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      ports:
-       - "8888:80"
-
     assembleia-app:
-      image: php:7.3-fpm
+      build: docker/php
       container_name: assembleia-app
       working_dir: /application
       volumes:
         - .:/application
         - ./docker/php/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+
+    assembleia-webserver:
+      image: nginx:alpine
+      container_name: assembleia-webserver
+      working_dir: /application
+      depends_on:
+        - assembleia-app
+      volumes:
+        - .:/application
+        - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "8888:80"
 
     assembleia-composer:
       image: composer:latest
