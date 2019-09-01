@@ -4,7 +4,7 @@ Este é um projeto que visa auxiliar a criação e votação de pautas através 
 
 ## Instalação e configuração
 
-tenhaPara instalar o sistema, é necessário que esteja instalado o docker e docker-compose, assim como o git.
+Para instalar o sistema, é necessário que esteja instalado o docker e docker-compose, assim como o git.
 Os comandos ditos neste tutorial são referente ao sistema operacial Ubuntu.
 
 - Clone o projeto

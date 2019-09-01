@@ -76,12 +76,14 @@ class PautaService
             $pauta = $this->pautaRepository->find($id);
 
             if (empty($pauta)) {
-                throw new QueryException();
+                return response()->json(["erro"=>"Pauta não encotrada"], Response::HTTP_BAD_REQUEST);
+            }
+
+            if ($pauta->votacao()->get()->count() > 0) {
+                return response()->json(["erro"=>"Esta pauta já fora votada, portanto não deve ser excluida."], Response::HTTP_BAD_REQUEST);
             }
 
             $resultado = $this->pautaRepository->delete($pauta);
-        } catch (QueryException $erro) {
-            return response()->json(['erro' => 'Pauta não encontrada'], Response::HTTP_NOT_FOUND);
         } catch (Exception $erro) {
             return response()->json(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
