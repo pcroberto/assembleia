@@ -23,9 +23,9 @@ class VotacaoController extends Controller
         return $this->votacaoService->new($request);
     }
 
-    public function resultado(Request $request)
+    public function resultado($id)
     {
-        return $this->votacaoService->resultado($request);
+        return $this->votacaoService->resultado($id);
     }
     
     public function votar(Request $request)

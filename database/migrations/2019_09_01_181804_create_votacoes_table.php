@@ -15,7 +15,7 @@ class CreateVotacoesTable extends Migration
     {
         Schema::create('votacoes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('pauta_id');
+            $table->unsignedBigInteger('pauta_id')->unique();
             $table->foreign('pauta_id')->references('id')->on('pautas');
             $table->integer('minutos')->default(1);
             $table->timestamps();
