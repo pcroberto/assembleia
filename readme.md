@@ -26,7 +26,7 @@ Os comandos ditos neste tutorial são referente ao sistema operacial Ubuntu.
 
 > DB_PASSWORD=123456
 
-- Execute o comando **docker run --rm -v $(pwd):/app composer** para baixar as dependências do projeto utilizando um container do composer.
+- Execute o comando **docker run --rm -v $(pwd):/app composer install** para baixar as dependências do projeto utilizando um container do composer.
 - Após execute **sudo chmod 775 -R . && sudo chmod 777 storage/logs/** para ajustar as permissões do projeto.
 - Execute **sudo chown -R seu_usuario.seu_grupo .**.
 - Execute **docker-compose up -d** para iniciar os serviços.
