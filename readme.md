@@ -1,21 +1,67 @@
-# Lumen PHP Framework
+# Assembleia
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+Este é um projeto que visa auxiliar a criação e votação de pautas através de uma API.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Instalação e configuração
 
-## Official Documentation
+tenhaPara instalar o sistema, é necessário que esteja instalado o docker e docker-compose, assim como o git.
+Os comandos ditos neste tutorial são referente ao sistema operacial Ubuntu.
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+- Clone o projeto
+- Acesse o diretório do projeto
+- Copie o arquivo .env.example para .env
+- Altere as informações ditas abaixo no arquivo .env:
 
-## Security Vulnerabilities
+> APP_TIMEZONE=America/Sao_Paulo 
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+> DB_CONNECTION=pgsql
 
-## License
+> DB_HOST=assembleia-database
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> DB_PORT=5432
+
+> DB_DATABASE=assembleia
+
+> DB_USERNAME=assembleia
+
+> DB_PASSWORD=123456
+
+- Execute o comando **docker run --rm -v $(pwd):/app composer** para baixar as dependências do projeto utilizando um container do composer.
+- Após execute **sudo chmod 775 -R . && sudo chmod 777 storage/logs/** para ajustar as permissões do projeto.
+- Execute **sudo chown -R seu_usuario.seu_grupo .**.
+- Execute **docker-compose up -d** para iniciar os serviços.
+- Execute **docker exec -it assembleia-app bash** para acessar o container da aplicação.
+- Execute **php artisan migrate** para realizar as migrações do banco de dados.
+- Execute **exit** para sair do container.
+
+## Utilização do sistema
+
+Este projeto é uma API REST. Abaixo estão as rotas disponíveis com exemplos de informações para os corpos das requisições, quando necessário.
+
+### **GET** localhost:8888/pautas
+Consultar todas as pautas.
+
+### **GET** localhost:8888/pauta/{id}
+Consultar uma pauta pelo id.
+
+### **POST** localhost:8888/pauta
+Inserir uma nova pauta. Exemplo do corpo da requisição:
+> {	"nome": "Pauta 1 ",	"descricao": "Decrição da Pauta 1"}
+
+### **PUT** localhost:8888/pauta/{id}
+Alteração das informações da pauta. Exemplo do corpo da requisição:
+> {	"nome": "Pauta 1 alterada",	"descricao": "Decrição da Pauta 1 alterada"}
+
+### **DELETE** localhost:8888/pauta/{id}
+Remove a pauta
+
+### **POST** localhost:8888/votacao
+Inicia uma votação para uma pauta. Exemplo do corpo da requisição:
+> { "pauta_id": "1", "minutos": "2" }
+
+### **POST** localhost:8888/votacao/votar
+Registra um voto para uma votação de uma pauta. Exemplo do corpo da requisição:
+> { "votacao_id": "1", "voto": false, "associado": 7 }
+
+### **GET** localhost:8888/votacao/resultado/{id}
+Consulta o resultado de uma votação pelo id da pauta
