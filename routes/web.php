@@ -20,4 +20,10 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         $router->put('/{id}', 'PautaController@update');
         $router->delete('/{id}', 'PautaController@remove');
     });
+
+    $router->group(['prefix' => '/votacao'], function () use ($router) {
+        $router->post('/', 'VotacaoController@new');
+        $router->get('/resultado/{id}', 'VotacaoController@resultado');
+        $router->post('/votar', 'VotacaoController@votar');
+    });
 });

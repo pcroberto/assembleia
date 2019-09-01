@@ -11,4 +11,9 @@ class Pauta extends Model
         'nome',
         'descricao'
     ];
+
+    public function votacoes()
+    {
+        return $this->hasMany('App\Models\Votacao');
+    }
 }

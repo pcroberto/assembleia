@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\PautaService;
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Validator;
 
 class PautaController extends Controller
 {

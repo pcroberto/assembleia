@@ -16,5 +16,13 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repositories\PautaRepositoryInterface', 'App\Repositories\PautaRepository'
         );
+
+        $this->app->bind(
+            'App\Repositories\VotacaoRepositoryInterface', 'App\Repositories\VotacaoRepository'
+        );
+
+        $this->app->bind(
+            'App\Repositories\VotoRepositoryInterface', 'App\Repositories\VotoRepository'
+        );
     }
 }
